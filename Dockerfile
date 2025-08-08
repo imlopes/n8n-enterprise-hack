@@ -16,19 +16,25 @@ ENV DOCKER_BUILD=true \
 
 WORKDIR /usr/src/app
 
-# 1️⃣ Copia todo o código-fonte
-COPY . .
+# Copy package files first for better layer caching
+COPY package*.json pnpm-lock.yaml* ./
+COPY packages/*/package*.json ./packages/*/
 
-## 2️⃣ Instala pnpm, dependências e build do monorepo
-#RUN npm install -g pnpm \
-# && pnpm install --frozen-lockfile \
-# && pnpm run build && npx update-browserslist-db@latest
+# Install pnpm and dependencies
+RUN npm install -g pnpm \
+ && pnpm install --frozen-lockfile
 
-# 3️⃣ Ajusta script binário (CRLF → LF + permissão)
+# Copy source code (excluding node_modules and other unnecessary files)
+COPY --exclude=node_modules --exclude=.git --exclude=dist --exclude=build --exclude=coverage --exclude=.nyc_output . .
+
+# Build the application
+RUN pnpm run build && npx update-browserslist-db@latest
+
+# Ajusta script binário (CRLF → LF + permissão)
 RUN sed -i 's/\r$//' packages/cli/bin/n8n \
  && chmod +x packages/cli/bin/n8n
 
-# 4️⃣ Link global para comando n8n
+# Link global para comando n8n
 RUN ln -s /usr/src/app/packages/cli/bin/n8n /usr/local/bin/n8n
 
 # Porta padrão do n8n
