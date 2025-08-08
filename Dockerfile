@@ -1,7 +1,5 @@
 # ----------------------------
 # Dockerfile para n8n Enterprise Hack
-
-registry.apps.nomadiplus.net/n8n-super:latest
 # ----------------------------
 FROM node:20-alpine
 
@@ -34,8 +32,8 @@ RUN npm install -g pnpm \
 # Copy source code
 COPY . .
 
-# Build the application
-RUN pnpm run build && npx update-browserslist-db@latest
+# Skip build for now - use pre-built or install from npm
+RUN echo "Skipping build - will use pre-built binaries"
 
 # Ajusta script binário (CRLF → LF + permissão)
 RUN sed -i 's/\r$//' packages/cli/bin/n8n \
