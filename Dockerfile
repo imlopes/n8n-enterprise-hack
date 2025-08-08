@@ -33,7 +33,7 @@ RUN npm install -g pnpm \
 COPY . .
 
 # Build the application
-RUN pnpm run build && npx update-browserslist-db@latest
+#RUN pnpm run build && npx update-browserslist-db@latest
 
 # Ajusta script binário (CRLF → LF + permissão)
 RUN sed -i 's/\r$//' packages/cli/bin/n8n \
