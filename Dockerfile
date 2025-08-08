@@ -17,8 +17,7 @@ ENV DOCKER_BUILD=true \
 WORKDIR /usr/src/app
 
 # Copy package files first for better layer caching
-COPY package*.json pnpm-lock.yaml* ./
-COPY packages/*/package*.json ./packages/*/
+COPY package*.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 
 # Install pnpm and dependencies
 RUN npm install -g pnpm \
