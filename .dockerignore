@@ -54,6 +54,9 @@ docker-compose*
 # Keep patches directory (needed for pnpm patchedDependencies)
 !patches/
 
+# Keep scripts directory (needed for preinstall scripts)
+!scripts/
+
 # Documentation
 README.md
 CHANGELOG.md
