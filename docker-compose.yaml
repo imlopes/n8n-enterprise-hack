@@ -36,8 +36,7 @@ services:
       COOLIFY_BRANCH: '"main"'
       COOLIFY_RESOURCE_UUID: n8n-super
       COOLIFY_CONTAINER_NAME: n8n-super
-      SERVICE_URL_WAHA: 'http://n8n-super.apps3.nomadiplus.net'
-      SERVICE_FQDN_WAHA: n8n-super.apps3.nomadiplus.net
+      SERVICE_URL_N8N_SUPER: n8n-super.apps3.nomadiplus.net
       COOLIFY_URL: 'http://n8n-super.apps3.nomadiplus.net'
       COOLIFY_FQDN: n8n-super.apps3.nomadiplus.net
       # Database Configuration
