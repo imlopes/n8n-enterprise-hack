@@ -1,23 +1,29 @@
 # ----------------------------
-# docker-compose.yml para n8n Enterprise Hack
+# docker-compose.yml para n8n
 # ----------------------------
-version: '3.8'
 
 services:
   db:
     image: postgres:14
     restart: unless-stopped
     environment:
-      POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: n8n
-      POSTGRES_DB: n8n
+      POSTGRES_USER: ${DB_POSTGRESDB_USER}
+      POSTGRES_PASSWORD: ${DB_POSTGRESDB_PASSWORD}
+      POSTGRES_DB: ${DB_POSTGRESDB_DATABASE}
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U n8n"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_POSTGRESDB_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - ./data/redis:/data
+    command: redis-server --appendonly yes
 
   n8n:
     image: registry.apps.nomadiplus.net/n8n-super:latest
@@ -112,7 +118,7 @@ services:
     labels:
       - coolify.managed=true
       - coolify.version=4.0.0-beta.420.6
-      - coolify.applicationId=50
+      - coolify.applicationId=11
       - coolify.type=application
       - coolify.name=n8n-super
       - coolify.resourceName=n8n-super
