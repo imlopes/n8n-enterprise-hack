@@ -22,10 +22,18 @@ services:
   n8n:
     image: registry.apps.nomadiplus.net/n8n-super:latest
     restart: unless-stopped
+    container_name: n8n-super
     depends_on:
       db:
         condition: service_healthy
     environment:
+      COOLIFY_BRANCH: '"main"'
+      COOLIFY_RESOURCE_UUID: n8n-super
+      COOLIFY_CONTAINER_NAME: n8n-super
+      SERVICE_URL_WAHA: 'http://n8n-super.apps3.nomadiplus.net'
+      SERVICE_FQDN_WAHA: n8n-super.apps3.nomadiplus.net
+      COOLIFY_URL: 'http://n8n-super.apps3.nomadiplus.net'
+      COOLIFY_FQDN: n8n-super.apps3.nomadiplus.net
       # Database Configuration
       DB_TYPE: ${DB_TYPE}
       DB_POSTGRESDB_HOST: db
@@ -117,13 +125,13 @@ services:
       - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
       - traefik.http.routers.http-0-n8n-super.entryPoints=http
       - traefik.http.routers.http-0-n8n-super.middlewares=gzip
-      - 'traefik.http.routers.http-0-n8n-super.rule=Host(`n8n-super.nomadiplus.net`) && PathPrefix(`/`)'
+      - 'traefik.http.routers.http-0-n8n-super.rule=Host(`n8n-super.apps3.nomadiplus.net`) && PathPrefix(`/`)'
       - 'caddy_0.encode=zstd gzip'
       - 'caddy_0.handle_path.0_reverse_proxy={{upstreams}}'
       - 'caddy_0.handle_path=/*'
       - caddy_0.header=-Server
       - 'caddy_0.try_files={path} /index.html /index.php'
-      - 'caddy_0=http://n8n-super.nomadiplus.net'
+      - 'caddy_0=http://n8n-super.apps3.nomadiplus.net'
       - caddy_ingress_network=n8n-super
     
 
