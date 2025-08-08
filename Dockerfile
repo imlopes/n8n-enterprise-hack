@@ -19,6 +19,9 @@ WORKDIR /usr/src/app
 # Copy package files first for better layer caching
 COPY package*.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 
+# Copy patches directory (needed for patchedDependencies)
+COPY patches/ ./patches/
+
 # Install pnpm and dependencies
 RUN npm install -g pnpm \
  && pnpm install --frozen-lockfile

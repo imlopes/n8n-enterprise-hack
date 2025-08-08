@@ -51,6 +51,9 @@ Dockerfile*
 docker-compose*
 .dockerignore
 
+# Keep patches directory (needed for pnpm patchedDependencies)
+!patches/
+
 # Documentation
 README.md
 CHANGELOG.md
