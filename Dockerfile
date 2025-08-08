@@ -24,8 +24,8 @@ COPY packages/*/package*.json ./packages/*/
 RUN npm install -g pnpm \
  && pnpm install --frozen-lockfile
 
-# Copy source code (excluding node_modules and other unnecessary files)
-COPY --exclude=node_modules --exclude=.git --exclude=dist --exclude=build --exclude=coverage --exclude=.nyc_output . .
+# Copy source code
+COPY . .
 
 # Build the application
 RUN pnpm run build && npx update-browserslist-db@latest
