@@ -1,0 +1,5 @@
+
+
+> @n8n/di@0.5.0 build /Users/ilo/projects/02-odoo/04-nomadi/tools/unraid/developer-tools/compose-manager/projects/n8n-super/packages/@n8n/di
+> tsc -p tsconfig.build.json
+

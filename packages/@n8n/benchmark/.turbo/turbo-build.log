@@ -1,0 +1,5 @@
+
+
+> @n8n/n8n-benchmark@1.15.0 build /Users/ilo/projects/02-odoo/04-nomadi/tools/unraid/developer-tools/compose-manager/projects/n8n-super/packages/@n8n/benchmark
+> tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json
+

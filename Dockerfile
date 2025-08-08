@@ -19,10 +19,10 @@ WORKDIR /usr/src/app
 # 1️⃣ Copia todo o código-fonte
 COPY . .
 
-# 2️⃣ Instala pnpm, dependências e build do monorepo
-RUN npm install -g pnpm \
- && pnpm install --frozen-lockfile \
- && pnpm run build
+## 2️⃣ Instala pnpm, dependências e build do monorepo
+#RUN npm install -g pnpm \
+# && pnpm install --frozen-lockfile \
+# && pnpm run build && npx update-browserslist-db@latest
 
 # 3️⃣ Ajusta script binário (CRLF → LF + permissão)
 RUN sed -i 's/\r$//' packages/cli/bin/n8n \
